@@ -159,20 +159,28 @@ Traefik ingress
 ### CI/CD pipeline
 
 ```
-push to main
-     │
-     ▼
-CI (ubuntu-latest)
-  matrix: [backend, frontend]   ← both jobs run in parallel
-  → docker build (with GHA layer cache)
-  → push to ghcr.io/<service>:<commit-sha>
-     │
-     ▼  (workflow_run: completed)
-CD (self-hosted runner)
-  → kubectl apply -R -f k8s/
-  → rollout status backend & frontend in parallel (timeout: 60s)
-  → on failure: kubectl rollout undo (automatic rollback to previous revision)
+push to develop       push to main
+pull_request               │
+      │                    │
+      ▼                    ▼
+ CI (ubuntu-latest, matrix: [backend, frontend])
+      │                    │
+ build only          build + push to GHCR
+                           │
+                           ▼
+                     CD (self-hosted runner)
+                       → kubectl apply -R -f k8s/
+                       → rollout status (timeout: 60s)
+                       → on failure: kubectl rollout undo
 ```
+
+### CI/CD triggers
+
+| Event | Branch | CI | CD |
+|-------|--------|----|----|
+| `push` | `main` | build + push to GHCR | deploy (if CI success) |
+| `push` | `develop` | build only | not triggered |
+| `pull_request` | any | build only | not triggered |
 
 ### Build platform
 
