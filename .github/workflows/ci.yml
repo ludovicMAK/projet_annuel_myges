@@ -6,12 +6,9 @@ on:
     branches: [main, develop]
 
 
-env:
-  BUILD_PLATFORM: ${{ vars.BUILD_PLATFORM || 'linux/amd64' }}
-
 jobs:
   build:
-    name: Build & Push ${{ matrix.service }}
+    name: ${{ github.ref == 'refs/heads/main' && 'Build & Push' || 'Build' }} ${{ matrix.service }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -36,14 +33,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build & push ${{ matrix.service }}
+      - name: ${{ github.ref == 'refs/heads/main' && 'Build & push image' || 'Build image' }}
         uses: docker/build-push-action@v6
         with:
           context: .
           file: ./docker/${{ matrix.service }}/Dockerfile
           target: prod
           push: ${{ github.ref == 'refs/heads/main' }}
-          platforms: ${{ env.BUILD_PLATFORM }}
+          platforms: linux/amd64
           tags: ghcr.io/aztymatt/myges-${{ matrix.service }}:${{ github.sha }}
           cache-from: type=gha,scope=${{ matrix.service }}
           cache-to: type=gha,mode=max,scope=${{ matrix.service }}
