@@ -184,8 +184,8 @@ pull_request               │
 
 ### Build platform
 
-By default, Docker images are built for `linux/amd64`.
-Set the `BUILD_PLATFORM` repository variable (**Settings → Variables → Actions**) to `linux/arm64` when deploying to an ARM-based environment such as Apple Silicon or AWS Graviton.
+Docker images are built for `linux/amd64`.
+ARM-based environments (Apple Silicon, AWS Graviton etc.) must enable QEMU binfmt support or equivalent (e.g. Rosetta 2 on macOS) to run these images.
 
 ### Docker layer cache
 
