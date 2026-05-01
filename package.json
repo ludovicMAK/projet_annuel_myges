@@ -29,6 +29,8 @@
   },
   "homepage": "https://github.com/ludovicMAK/projet_annuel_myges#readme",
   "devDependencies": {
+    "@types/node": "^25.6.0",
+    "@types/pg": "^8.20.0",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.19.3",

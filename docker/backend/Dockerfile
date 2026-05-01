@@ -9,7 +9,7 @@ COPY infrastructure/backend/express/package*.json ./infrastructure/backend/expre
 # ---- Dev ----
 FROM base AS dev
 RUN npm ci
-CMD ["npx", "tsx", "watch", "infrastructure/backend/express/server.ts"]
+CMD ["npx", "tsx", "watch", "infrastructure/backend/express/src/index.ts"]
 
 # ---- Builder ----
 FROM base AS builder
@@ -25,4 +25,4 @@ COPY package*.json ./
 COPY infrastructure/backend/express/package*.json ./infrastructure/backend/express/
 RUN npm ci --omit=dev --workspace=@myges/express
 COPY --from=builder /app/infrastructure/backend/express/dist ./infrastructure/backend/express/dist
-CMD ["node", "infrastructure/backend/express/dist/server.js"]
+CMD ["node", "infrastructure/backend/express/dist/src/index.js"]

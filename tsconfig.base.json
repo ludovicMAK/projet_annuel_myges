@@ -6,6 +6,13 @@
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@application/*": ["application/*"],
+      "@domain/*": ["domain/*"],
+      "@adapters/*": ["infrastructure/adaptaters/*"],
+      "@express/*": ["infrastructure/backend/express/*"]
+    }
   }
 }

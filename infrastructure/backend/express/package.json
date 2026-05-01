@@ -2,23 +2,28 @@
   "name": "@myges/express",
   "version": "1.0.0",
   "scripts": {
-    "dev": "tsx watch server.ts",
+    "dev": "tsx watch src/index.ts",
     "build": "tsc -b",
-    "start": "node dist/server.js"
+    "start": "node dist/src/index.js"
   },
   "dependencies": {
     "argon2": "^0.44.0",
     "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "otplib": "^13.4.0",
-    "speakeasy": "^2.0.0"
+    "pg": "^8",
+    "speakeasy": "^2.0.0",
+    "zod": "^4.4.1"
   },
   "devDependencies": {
     "@types/cors": "^2",
     "@types/express": "^5",
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^20.19.39",
+    "@types/pg": "^8.20.0",
     "@types/speakeasy": "^2.0.10",
-    "typescript": "^5"
+    "typescript": "^6.0.2"
   }
 }

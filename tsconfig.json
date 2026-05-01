@@ -4,9 +4,10 @@
   "references": [
     { "path": "domain" },
     { "path": "application" },
+    { "path": "infrastructure/adaptaters" },
     { "path": "infrastructure/backend/express" }
   ],
   "compilerOptions": {
-    "ignoreDeprecations": "5.0"
+    "ignoreDeprecations": "6.0"
   }
 }
